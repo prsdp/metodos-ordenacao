@@ -4,24 +4,20 @@
 #define _INSERTION_SORT_H
 
 void insertion_sort(int vet[], int TAM){
-	
-	int aux, i, j;
-	
-	for(i=0;i<TAM;i++){
-		for(j=i+1;j<TAM;j++){
-			if(vet[i] > vet[j]){
-				aux = vet[i];
-				vet[i] = vet[j];
-				vet[j] = aux;
-			}
-		}
+             
+	int i, j, aux;
+
+	for(i = 1; i < TAM; i++){
+
+	j = i;
+			
+		while((vet[j] < vet[j-1])&&(j!=0)) {
+
+			aux = vet[j];
+			vet[j] = vet[j-1];
+			vet[j-1] = aux;
+			j--;    
+		}               
 	}
-	
-	printf("INSERTION SORT: ");
-	
-	for(i=0;i<TAM;i++){
-		printf("%d  ",vet[i]);
-	}
-		
 }
 #endif
