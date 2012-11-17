@@ -4,5 +4,6 @@
 #include "bubblesort.h"
 #include "insertionsort.h"
 #include "selectionsort.h"
+#include "quicksort.h"
 
 #endif
