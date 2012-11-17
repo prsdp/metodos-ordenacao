@@ -5,5 +5,6 @@
 #include "insertionsort.h"
 #include "selectionsort.h"
 #include "quicksort.h"
+#include "heapsort.h"
 
 #endif
