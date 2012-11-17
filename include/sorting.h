@@ -1,8 +1,8 @@
 #ifndef _SORTING_H
 #define _SORTING_H
 
-#include "bubble-sort.h"
-#include "insertion-sort.h"
-#include "selection-sort.h"
+#include "bubblesort.h"
+#include "insertionsort.h"
+#include "selectionsort.h"
 
 #endif
