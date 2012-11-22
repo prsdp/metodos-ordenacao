@@ -11,16 +11,17 @@ void utils_error(char msg[]) {
 }
 
 int max(int array[], int size) {
-	
+
 	int i=0;
 	int max = array[i];
-	
+
 	for(i=0;i<size;i++){
 		if(array[i]>max){
 			max = array[i];
 		}
 	}
-	return max;	
+
+    return max;
 }
 
 void print_array(int array[], int size) {
