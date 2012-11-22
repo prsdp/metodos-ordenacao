@@ -6,7 +6,7 @@ CC=gcc
 
 all: bubble-sort insertion-sort quick-sort heap-sort count-sort selection-sort \
 	bubble-sort-random-array heap-sort-random-array quick-sort-random-array \
-	random-arrays-with-ranges testdir
+	random-arrays-with-ranges sorting testdir
 
 testdir:
 	mkdir -p tests
@@ -40,6 +40,9 @@ quick-sort-random-array: testdir
 
 random-arrays-with-ranges: testdir
 	$(CC) -o $(TESTS)/random-arrays-with-ranges $(CFLAGS) $(HEADERS) $(SOURCES)/random-arrays-with-ranges.c
+
+sorting: testdir
+	$(CC) -o $(TESTS)/sorting $(CFLAGS) $(HEADERS) $(SOURCES)/sorting.c
 
 clean:
 	rm -rf $(TESTS)
