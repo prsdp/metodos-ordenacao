@@ -4,7 +4,7 @@ SOURCES=src
 TESTS=tests
 CC=gcc
 
-all: bubble-sort insertion-sort quick-sort heap-sort testdir
+all: bubble-sort insertion-sort quick-sort heap-sort count-sort testdir
 
 testdir:
 	mkdir -p tests
@@ -21,5 +21,7 @@ quick-sort: testdir
 heap-sort: testdir
 	$(CC) -o $(TESTS)/heap-sort $(CFLAGS) $(HEADERS) $(SOURCES)/heap-sort.c
 
+count-sort: testdir
+	$(CC) -o $(TESTS)/count-sort $(CFLAGS) $(HEADERS) $(SOURCES)/count-sort.c
 clean:
 	rm -rf $(TESTS)
