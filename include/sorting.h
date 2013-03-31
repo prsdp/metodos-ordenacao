@@ -7,5 +7,6 @@
 #include "quicksort.h"
 #include "heapsort.h"
 #include "countsort.h"
+#include "mergesort.h"
 
 #endif
