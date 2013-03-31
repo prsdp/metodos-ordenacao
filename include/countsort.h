@@ -1,5 +1,3 @@
-#include <stdio.h>
-
 #ifndef _COUNT_SORT_H
 #define _COUNT_SORT_H
 
@@ -22,7 +20,6 @@ void count_sort(int arraya[], int TAM, int max){
 		arrayb[arrayc[arraya[i]]-1]=arraya[i];
 		arrayc[arraya[i]]=arrayc[arraya[i]]-1;
 	}
-	for(i=0;i<TAM;i++)
-		printf("%d ",arrayb[i]);
+	
 }
 #endif

@@ -1,5 +1,3 @@
-#include <stdio.h>
-
 #ifndef _INSERTION_SORT_H
 #define _INSERTION_SORT_H
 
