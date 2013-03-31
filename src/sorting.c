@@ -5,16 +5,25 @@
 #include "utils.h"
 
 void usage() {
-    printf("Usage:\n\n");
-    printf("--method <type>           tipe de ordenação.\n");
-    printf("--array-size <size>       tamanho do vetor a ser gerado.\n");
+    printf("\nUsage:\t sorting --method <type> --array-size <size> --range <max-range>\n\n");
+    printf("--method <type>           tipo de ordenação.\n");
+    printf("--array-size <size>       [opcional] tamanho do vetor a ser gerado, default é 10.000\n");
+    printf("--range <max-range>       [opcional] intervalo dos valores aleatórios, default é 65.535\n");
     printf("--help                    lista as opções do programa.\n\n");
+    printf("Tipos de métodos válidos:\n");
+    printf("bubble, insertion, selection, quick, heap, count e merge.\n");
 }
 
 int main (int argc, char *argv[]) {
 
-    int size = -1;
-    int type;
+    int size = 10000;
+    int max_range = 65535;
+    int type = -1;
+
+    if (argc == 1) {
+    	usage();
+	exit(EXIT_FAILURE);
+    }
 
     while (argc--) {
 
@@ -31,9 +40,11 @@ int main (int argc, char *argv[]) {
                 type = 4;
             } else if (strcmp(argv[argc + 1], "count") == 0) {
                 type = 5;
+            } else if (strcmp(argv[argc + 1], "merge") == 0) {
+                type = 6;
             } else {
                 printf("Método inválido!\n");
-                printf("Use o -help para ver as opções.\n");
+                printf("Use o --help para ver as opções.\n");
                 exit(EXIT_FAILURE);
             }
         }
@@ -42,46 +53,69 @@ int main (int argc, char *argv[]) {
             size = atoi(argv[argc + 1]);
         }
 
-        if (strcmp(argv[argc], "--help") == 0) {
+	if (strcmp(argv[argc], "--range") == 0) {
+            max_range = atoi(argv[argc + 1]);
+        }
+        
+	if (strcmp(argv[argc], "--help") == 0) {
             usage();
             exit(EXIT_SUCCESS);
         }
     }
-
+    
     if (size <= 0) {
         printf("O tamanho do vetor é inválido.\n");
         exit(EXIT_FAILURE);
     }
+    
+    if (max_range <= 0) {
+    	printf("A faixa de valores do vetor é inválida.\n");
+        exit(EXIT_FAILURE);
+    }
+
+    if (type == -1) {
+    	usage();
+        exit(EXIT_FAILURE);
+    }
 
     int array[size];
-    random_array(array, size, 100);
+    random_array(array, size, max_range);
 
     switch (type) {
         case 0:
             printf("*** BUBBLE SORT ***");
-            printf("\nUnsorted: ");
-            print_array(array, size);
             bubble_sort(array, size);
-            printf("\nSorted: ");
-            print_array(array, size);
             printf("\n");
             break;
         case 1:
             printf("*** INSERTION SORT ***");
-            printf("\nUnsorted: ");
-            print_array(array, size);
             insertion_sort(array, size);
-            printf("\nSorted: ");
-            print_array(array, size);
             printf("\n");
             break;
         case 2:
+	    printf("*** SELECTION SORT ***");
+	    selection_sort(array, size);
+	    printf("\n");
             break;
         case 3:
+	    printf("*** QUICK SORT ***");
+	    quick_sort(array, 0, size);
+	    printf("\n");
             break;
         case 4:
+	    printf("*** HEAP SORT ***");
+	    heap_sort(array, size);
+	    printf("\n");
             break;
         case 5:
+            printf("*** COUNT SORT ***");
+	    count_sort(array, size, max(array,size));
+	    printf("\n");
+            break;
+	case 6:
+            printf("*** MERGE SORT ***");
+	    merge_sort(array, 0, size-1);
+	    printf("\n");
             break;
         default:
             break;
