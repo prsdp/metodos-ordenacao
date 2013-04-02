@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "sorting.h"
+#include "mergesort.h"
 #include "utils.h"
 
 int main (int argc, char **argv) {
