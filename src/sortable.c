@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <stdint.h>
 #include "sorting.h"
 #include "utils.h"
 
@@ -17,12 +18,12 @@ void usage() {
 int main (int argc, char *argv[]) {
 
     int size = 10000;
-    int max_range = 65535;
-    int type = -1;
+    uint8_t type = -1;
+    uint16_t max_range = 65535;
 
     if (argc == 1) {
     	usage();
-	exit(EXIT_FAILURE);
+	    exit(EXIT_FAILURE);
     }
 
     while (argc--) {
@@ -53,21 +54,21 @@ int main (int argc, char *argv[]) {
             size = atoi(argv[argc + 1]);
         }
 
-	if (strcmp(argv[argc], "--range") == 0) {
-            max_range = atoi(argv[argc + 1]);
+        if (strcmp(argv[argc], "--range") == 0) {
+            max_range = (uint16_t) atoi(argv[argc + 1]);
         }
-        
-	if (strcmp(argv[argc], "--help") == 0) {
+
+        if (strcmp(argv[argc], "--help") == 0) {
             usage();
             exit(EXIT_SUCCESS);
         }
     }
-    
+
     if (size <= 0) {
         printf("O tamanho do vetor é inválido.\n");
         exit(EXIT_FAILURE);
     }
-    
+
     if (max_range <= 0) {
     	printf("A faixa de valores do vetor é inválida.\n");
         exit(EXIT_FAILURE);
@@ -78,7 +79,8 @@ int main (int argc, char *argv[]) {
         exit(EXIT_FAILURE);
     }
 
-    int array[size];
+    //int array[size];
+    int *array = malloc(sizeof(int) * size);
     random_array(array, size, max_range);
 
     switch (type) {
@@ -93,29 +95,29 @@ int main (int argc, char *argv[]) {
             printf("\n");
             break;
         case 2:
-	    printf("*** SELECTION SORT ***");
-	    selection_sort(array, size);
-	    printf("\n");
+	        printf("*** SELECTION SORT ***");
+	        selection_sort(array, size);
+	        printf("\n");
             break;
         case 3:
-	    printf("*** QUICK SORT ***");
-	    quick_sort(array, 0, size);
-	    printf("\n");
+	        printf("*** QUICK SORT ***");
+	        quick_sort(array, 0, size);
+	        printf("\n");
             break;
         case 4:
-	    printf("*** HEAP SORT ***");
-	    heap_sort(array, size);
-	    printf("\n");
+            printf("*** HEAP SORT ***");
+            heap_sort(array, size);
+            printf("\n");
             break;
         case 5:
             printf("*** COUNT SORT ***");
-	    count_sort(array, size, max(array,size));
-	    printf("\n");
+            count_sort(array, size, max(array,size));
+            printf("\n");
             break;
-	case 6:
+        case 6:
             printf("*** MERGE SORT ***");
-	    merge_sort(array, 0, size-1);
-	    printf("\n");
+            merge_sort(array, 0, size-1);
+            printf("\n");
             break;
         default:
             break;
