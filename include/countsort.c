@@ -1,3 +1,4 @@
+#include <string.h>
 #include "countsort.h"
 
 void count_sort(int arraya[], int TAM, int max){
@@ -22,5 +23,7 @@ void count_sort(int arraya[], int TAM, int max){
 		arrayb[arrayc[arraya[i]]-1]=arraya[i];
 		arrayc[arraya[i]]=arrayc[arraya[i]]-1;
 	}
+
+    memcpy(arraya, arrayb, sizeof(arrayb));
 
 }

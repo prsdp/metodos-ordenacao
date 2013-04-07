@@ -12,7 +12,7 @@ int main(int argc, char **argv){
 	print_array(array1,TAM);	
 	printf("\nORDENADO: ");
 	count_sort(array1,TAM,max(array1,TAM));
-    //print_array(array1,TAM);
+    print_array(array1,TAM);
     printf("\n");
 	
 	return 0;
