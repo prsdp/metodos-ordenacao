@@ -1,9 +1,10 @@
 #include <string.h>
+#include <stdlib.h>
 #include "countsort.h"
 
 void count_sort(int arraya[], int TAM, int max){
 
-	int arrayb[TAM];
+    int *arrayb = malloc(sizeof(int) * TAM);
 	int arrayc[max+1];
 	int i;
 
