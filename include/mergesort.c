@@ -1,60 +1,63 @@
 #include <stdlib.h>
 #include "mergesort.h"
 
-void merge(int array[], int l, int m, int r) {
+void merge(int array[], int r) {
 
-    int i, j, k;
-    int n1 = m - l + 1;
-    int n2 =  r - m;
+    int q,i,j,k;
+    int* tmp;
 
-    int *L = (int *)malloc(sizeof(int)*n1);
-    int *R = (int *)malloc(sizeof(int)*n2);
+    tmp = (int*)malloc(sizeof(int)*r);
 
-
-    for (i = 0; i < n1; i++) {
-        L[i] = array[l + i];
+    if(tmp == NULL) {
+        exit(1);
     }
 
-    for (j = 0; j <= n2; j++) {
-        R[j] = array[m + 1+ j];
-	}
+    q = r/2;
 
     i = 0;
-    j = 0;
-    k = l;
+    j = q;
+    k = 0;
 
-    while (i < n1 && j < n2) {
-        if (L[i] <= R[j]) {
-            array[k] = L[i];
-            i++;
+    while (i < q && j < r) {
+        if (array[i] < array[j]) {
+            tmp[k] = array[i];
+            i=i+1;
         } else {
-            array[k] = R[j];
-            j++;
+            tmp[k] = array[j];
+            ++j;
         }
-
-        k++;
+        ++k;
     }
 
-    while (i < n1) {
-        array[k] = L[i];
-        i++;
-        k++;
+    if (i == q) {
+        while (j < r) {
+            tmp[k] = array[j];
+            ++j;
+            ++k;
+        }
+    } else {
+        while (i < q) {
+            tmp[k] = array[i];
+            ++i;
+            ++k;
+        }
     }
 
-    while (j < n2) {
-        array[k] = R[j];
-        j++;
-        k++;
+    for (i = 0; i < r; i++) {
+        array[i] = tmp[i];
     }
+    
+    free(tmp);
 }
 
-void merge_sort(int array[], int l, int r) {
+void merge_sort(int array[], int r) {
 
-    if (l < r) {
-        int m = (l+r)/2;
-
-        merge_sort(array, l, m);
-        merge_sort(array, m+1, r);
-        merge(array, l, m, r);
+    int q;
+ 
+    if (r > 1) {
+        q = r/2;
+        merge_sort(array, q);
+        merge_sort(array + q, r-q);
+        merge(array,r);
     }
 }

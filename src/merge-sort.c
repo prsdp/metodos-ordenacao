@@ -9,7 +9,7 @@ int main (int argc, char **argv) {
     printf("Unsorted: ");
     print_array(array, 10);
 
-    merge_sort(array, 0, 10-1);
+    merge_sort(array, 10);
 
     printf("\nSorted: ");
     print_array(array, 10);

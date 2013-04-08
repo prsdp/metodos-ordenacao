@@ -7,6 +7,6 @@ extern void selection_sort(int [], int);
 extern void quick_sort(int [], int, int);
 extern void heap_sort(int [], int);
 extern void count_sort(int [], int, int);
-extern void merge_sort(int [], int, int);
+extern void merge_sort(int [], int);
 
 #endif

@@ -79,7 +79,6 @@ int main (int argc, char *argv[]) {
         exit(EXIT_FAILURE);
     }
 
-    //int array[size];
     int *array = malloc(sizeof(int) * size);
     random_array(array, size, max_range);
 
@@ -116,7 +115,7 @@ int main (int argc, char *argv[]) {
             break;
         case 6:
             printf("*** MERGE SORT ***");
-            merge_sort(array, 0, size-1);
+            merge_sort(array, size);
             printf("\n");
             break;
         default:
