@@ -10,6 +10,7 @@ void usage() {
     printf("--method <type>           tipo de ordenação.\n");
     printf("--array-size <size>       [opcional] tamanho do vetor a ser gerado, default é 10.000\n");
     printf("--range <max-range>       [opcional] intervalo dos valores aleatórios, default é 65.535\n");
+    printf("--print                   [opcional] imprime o vetor ordenado ao final da operação\n");
     printf("--help                    lista as opções do programa.\n\n");
     printf("Tipos de métodos válidos:\n");
     printf("bubble, insertion, selection, quick, heap, count e merge.\n");
@@ -18,6 +19,7 @@ void usage() {
 int main (int argc, char *argv[]) {
 
     int size = 10000;
+    int print_flag = 0;
     uint8_t type = -1;
     uint16_t max_range = 65535;
 
@@ -56,6 +58,10 @@ int main (int argc, char *argv[]) {
 
         if (strcmp(argv[argc], "--range") == 0) {
             max_range = (uint16_t) atoi(argv[argc + 1]);
+        }
+
+        if (strcmp(argv[argc], "--print-array") == 0) {
+            print_flag = 1;
         }
 
         if (strcmp(argv[argc], "--help") == 0) {
@@ -120,6 +126,11 @@ int main (int argc, char *argv[]) {
             break;
         default:
             break;
+    }
+
+    if (print_flag) {
+        print_array(array, size);
+        printf("\n");
     }
 
     return 0;
