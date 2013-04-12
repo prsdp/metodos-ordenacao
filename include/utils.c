@@ -71,7 +71,7 @@ void random_array_with_range(int array[], int size, int range_min, int range_max
 
 float leakage (int array[], int size){
 	
-	float soma_array=0, media=0, desvio, soma=0, variancia;
+	float soma_array=0, media=0, soma=0, variancia, desvio;
 	int i;
 	
 	for (i = 0; i < size; i++) {
@@ -84,8 +84,7 @@ float leakage (int array[], int size){
 	}
 	
 	variancia = soma/size;
-	desvio = pow(variancia,1/2);
-	
+	desvio = pow(variancia,0.5);
 	return desvio;
 }
 
