@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <math.h>
 #include <time.h>
 #include "utils.h"
 
@@ -66,4 +67,56 @@ void random_array_with_range(int array[], int size, int range_min, int range_max
     for (i = 0; i < size; i++) {
         array[i] = rand() % (range_max - range_min + 1) + range_min;
     }
+}
+
+float leakage (int array[], int size){
+	
+	float soma_array=0, media=0, desvio, soma=0, variancia;
+	int i;
+	
+	for (i = 0; i < size; i++) {
+		soma_array+=array[i];
+		media = soma_array/size;
+	}
+	
+	for (i = 0; i < size; i++) {
+		soma+=(array[i] - media)*(array[i] - media);
+	}
+	
+	variancia = soma/size;
+	desvio = pow(variancia,1/2);
+	
+	return desvio;
+}
+
+void create_file(){
+	
+	FILE *fp;
+
+    fp = fopen("methods.csv", "a");
+
+    if (fp == NULL) {
+        printf("Não foi possível abrir o arquivo.\n");
+        exit(0);
+    }
+
+    fprintf(fp, "Size,Time,Leakage\n");
+    fclose(fp);
+    
+}
+
+void write_file(int size, double tempo, float leakage){
+	
+	FILE *fp;
+	
+	fp = fopen("methods.csv", "a");
+
+    if (fp == NULL) {
+        printf("Não foi possível abrir o arquivo.\n");
+        exit(0);
+    }
+
+    fprintf(fp, "%d,%.2f,%.2f\n", size,tempo,leakage);
+    fclose(fp);
+    
 }
