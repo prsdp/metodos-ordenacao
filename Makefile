@@ -130,7 +130,7 @@ random-arrays-with-ranges: testdir utils.o sorting.o
 sortable: testdir utils.o sorting.o
 	cp $(SOURCES)/sortable.c $(TESTS)
 	$(CC) -c $(TESTS)/sortable.c -o $(TESTS)/sortable.o
-	$(CC) $(TESTS)/*.o -o $(TESTS)/sortable
+	$(CC) $(TESTS)/*.o -o $(TESTS)/sortable -lm
 	rm $(TESTS)/*.o $(TESTS)/*.c $(TESTS)/*.h
 
 clean:
