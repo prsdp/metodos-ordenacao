@@ -6,8 +6,7 @@ int max(int [], int);
 void print_array(int [], int);
 void random_array(int [], int, int);
 void random_array_with_range(int [], int, int, int);
-float leakage (int array[], int size);
-void create_file();
-void write_file(int size, double tempo, float leakage);
+float leakage (int [], int );
+void create_file(char [], int, double, float, double);
 
 #endif

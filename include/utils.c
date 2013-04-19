@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include <math.h>
 #include <time.h>
 #include "utils.h"
@@ -88,34 +89,26 @@ float leakage (int array[], int size){
 	return desvio;
 }
 
-void create_file(){
+void create_file(char filename[], int size, double tempo, float leakage, double media_tempo){
 	
 	FILE *fp;
+    int length;
+    char str[50];
 
-    fp = fopen("methods.csv", "a");
-
-    if (fp == NULL) {
-        printf("Não foi possível abrir o arquivo.\n");
-        exit(0);
+    if (!(int)strlen(filename)){
+        fprintf(stderr, "É necessário o nome do arquivo!\n");        
     }
-
-    fprintf(fp, "Size,Time,Leakage\n");
-    fclose(fp);
     
-}
+    strncpy(str, filename, sizeof(str));
+    strncat(str, ".dat", strlen(filename));
 
-void write_file(int size, double tempo, float leakage){
-	
-	FILE *fp;
-	
-	fp = fopen("methods.csv", "a");
+    fp = fopen(str, "a");
 
     if (fp == NULL) {
-        printf("Não foi possível abrir o arquivo.\n");
-        exit(0);
+        fprintf(stderr,"Não foi possível abrir o arquivo.\n");
     }
 
-    fprintf(fp, "%d,%.2f,%.2f\n", size,tempo,leakage);
+    fprintf(fp, "%d %.2f %.2f %.2f\n", size,tempo,leakage, media_tempo);
     fclose(fp);
     
 }
