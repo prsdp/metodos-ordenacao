@@ -13,7 +13,8 @@ void usage() {
     printf("--array-size <size>       [opcional] tamanho do vetor a ser gerado, default é 10.000\n");
     printf("--range <max-range>       [opcional] intervalo dos valores aleatórios, default é 65.535\n");
     printf("--quantity <value>        [opcional] quantidade de vetores a serem criados, default é 1\n");
-    printf("--print-array             [opcional] imprime o vetor ordenado ao final da operação, apenas se --quantity for igual a 1\n");
+    printf("--print-array             [opcional] imprime o vetor ordenado ao final da operação,\n"); 
+    printf("                                     apenas se --quantity for igual a 1\n");
     printf("--help                    lista as opções do programa.\n\n");
     printf("Tipos de métodos válidos:\n");
     printf("bubble, insertion, selection, quick, heap, count e merge.\n");
@@ -21,17 +22,25 @@ void usage() {
 
 void alakazam(int quantity, uint8_t type, int size, uint16_t max_range, uint8_t print_flag) {
     int i;
-    float sum;
+    float sum = 0;
+    float soma_tempo=0;    
+    char filename[50];
     time_t start, end;
     time(&start);
+
 
     switch (type) {
         case 0:
             printf("*** BUBBLE SORT ***\n");
+            strncpy(filename, "bubble-sort",sizeof(filename));            
             for (i = 1; i <= quantity; i++) {
+                time_t inicio,fim;
+                time(&inicio);
                 int *array = malloc(sizeof(int) * size);
                 random_array(array, size, max_range);
                 bubble_sort(array, size);
+                time(&fim);
+                soma_tempo+=difftime(fim, inicio);
                 if (quantity == 1 && print_flag) {
                     print_array(array, size);
                 }
@@ -41,10 +50,15 @@ void alakazam(int quantity, uint8_t type, int size, uint16_t max_range, uint8_t 
             break;
         case 1:
             printf("*** INSERTION SORT ***\n");
+            strncpy(filename, "insertion-sort",sizeof(filename));
             for (i = 1; i <= quantity; i++) {
+                time_t inicio,fim;
+                time(&inicio);
                 int *array = malloc(sizeof(int) * size);
                 random_array(array, size, max_range);
                 insertion_sort(array, size);
+                time(&fim);
+                soma_tempo+=difftime(fim, inicio);                
                 if (quantity == 1 && print_flag) {
                     print_array(array, size);
                 }
@@ -54,10 +68,15 @@ void alakazam(int quantity, uint8_t type, int size, uint16_t max_range, uint8_t 
             break;
         case 2:
 	        printf("*** SELECTION SORT ***\n");
+            strncpy(filename, "selection-sort",sizeof(filename));
             for (i = 1; i <= quantity; i++) {
+                time_t inicio,fim;
+                time(&inicio);
                 int *array = malloc(sizeof(int) * size);
                 random_array(array, size, max_range);
                 selection_sort(array, size);
+                time(&fim);
+                soma_tempo+=difftime(fim, inicio);                
                 if (quantity == 1 && print_flag) {
                     print_array(array, size);
                 }
@@ -67,10 +86,15 @@ void alakazam(int quantity, uint8_t type, int size, uint16_t max_range, uint8_t 
             break;
         case 3:
 	        printf("*** QUICK SORT ***\n");
+            strncpy(filename, "quick-sort",sizeof(filename));
             for (i = 1; i <= quantity; i++) {
+                time_t inicio,fim;
+                time(&inicio);                
                 int *array = malloc(sizeof(int) * size);
                 random_array(array, size, max_range);
                 quick_sort(array, 0, size);
+                time(&fim);
+                soma_tempo+=difftime(fim, inicio);
                 if (quantity == 1 && print_flag) {
                     print_array(array, size);
                 }
@@ -80,10 +104,15 @@ void alakazam(int quantity, uint8_t type, int size, uint16_t max_range, uint8_t 
             break;
         case 4:
             printf("*** HEAP SORT ***\n");
+            strncpy(filename, "heap-sort",sizeof(filename));
             for (i = 1; i <= quantity; i++) {
+                time_t inicio,fim;
+                time(&inicio); 
                 int *array = malloc(sizeof(int) * size);
                 random_array(array, size, max_range);
                 heap_sort(array, size);
+                time(&fim);
+                soma_tempo+=difftime(fim, inicio);
                 if (quantity == 1 && print_flag) {
                     print_array(array, size);
                 }
@@ -93,10 +122,15 @@ void alakazam(int quantity, uint8_t type, int size, uint16_t max_range, uint8_t 
             break;
         case 5:
             printf("*** COUNT SORT ***\n");
+            strncpy(filename, "count-sort",sizeof(filename));
             for (i = 1; i <= quantity; i++) {
+                time_t inicio,fim;
+                time(&inicio); 
                 int *array = malloc(sizeof(int) * size);
                 random_array(array, size, max_range);
                 count_sort(array, size, max(array, size));
+                time(&fim);
+                soma_tempo+=difftime(fim, inicio);
                 if (quantity == 1 && print_flag) {
                     print_array(array, size);
                 }
@@ -106,10 +140,15 @@ void alakazam(int quantity, uint8_t type, int size, uint16_t max_range, uint8_t 
             break;
         case 6:
             printf("*** MERGE SORT ***\n");
+            strncpy(filename, "merge-sort",sizeof(filename));
             for (i = 1; i <= quantity; i++) {
+                time_t inicio,fim;
+                time(&inicio); 
                 int *array = malloc(sizeof(int) * size);
                 random_array(array, size, max_range);
                 merge_sort(array, size);
+                time(&fim);
+                soma_tempo+=difftime(fim, inicio);
                 if (quantity == 1 && print_flag) {
                     print_array(array, size);
                 }
@@ -120,10 +159,9 @@ void alakazam(int quantity, uint8_t type, int size, uint16_t max_range, uint8_t 
         default:
             break;
     }
-
+    float media_tempo = (float)(soma_tempo/quantity);
     time(&end);
-    create_file();
-    write_file(size, difftime(end, start), sum);
+    create_file(filename, size, difftime(end, start), sum, media_tempo);
 
 }
 
